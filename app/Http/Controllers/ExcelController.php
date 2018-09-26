@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Exports\UsersExport;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Jobs\NotifyUserOfCompletedExport;
 
 class ExcelController extends Controller
 {
@@ -33,8 +31,9 @@ class ExcelController extends Controller
 
     public function exportWithQueue (Request $request)
     {
-        return (new UsersExport)->queue('users.xlsx')->chain([
-            new NotifyUserOfCompletedExport(request()->user()),
-        ]);
+        $userExport = new UsersExport;
+        $userExport->queue('users.xlsx');
+
+        return $userExport->download('users.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }
