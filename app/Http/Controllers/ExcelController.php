@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Exports\UsersExport;
 
@@ -29,7 +30,8 @@ class ExcelController extends Controller
      */
     public function showPage ()
     {
-        return view ('excel');
+        $users = User::getSomeRec();
+        return view ('excel', compact('users'));
     }
 
     /**
