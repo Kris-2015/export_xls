@@ -22,15 +22,6 @@
                     Download excel sheet
                 </a>
             </div>
-            <div class="col-sm-6" style="margin-left: -130px; margin-top: 8px">
-                <div class="progress">
-                    <div class="progress-bar bg-danger" role="progressbar"
-                         aria-valuenow="70" aria-valuemin="0"
-                         aria-valuemax="100" style="width:70%">
-                        70%
-                    </div>
-                </div>
-            </div>
             <br><br>
             <div class="col-sm-12">
                 <div class="col-sm-9 col-sm-offset-2">
@@ -61,7 +52,7 @@
             </div>
         </div>
     </div>
-        <script src="{{ url('js/jquery-3.3.1.min.js') }}"></script>
-        <script src="{{ url('bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url('js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ url('bootstrap/dist/js/bootstrap.min.js') }}"></script>
     </body>
 </html>
