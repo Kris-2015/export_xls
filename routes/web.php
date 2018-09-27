@@ -14,4 +14,4 @@
 Route::get('/', 'ExcelController@showPage');
 Route::get('export_file', 'ExcelController@export');
 Route::get('export_file_queue', 'ExcelController@exportWithQueue')->name('export_file_queue');
-Route::get('export_file_multiple_sheets', 'ExcelController@download')->name('export_file_multiple_sheets');
+Route::get('export_file_multiple_sheets', 'ExcelController@downloadWithMultipleSheets')->name('export_file_multiple_sheets');

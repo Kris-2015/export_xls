@@ -30,6 +30,7 @@ class ExcelController extends Controller
      */
     public function showPage ()
     {
+        // Get the list of records of users
         $users = User::getSomeRec();
         return view ('excel', compact('users'));
     }
@@ -41,7 +42,6 @@ class ExcelController extends Controller
      */
     public function export(Request $request)
     {
-        //return Excel::download(new UsersExport, 'users.xlsx');
         (new UsersExport)->queue('users.xlsx');
 
         return back()->withSuccess('Export started!');
@@ -54,7 +54,7 @@ class ExcelController extends Controller
      */
     public function exportWithQueue (Request $request)
     {
-        $userExport = new UsersExport;
+        $userExport = new UsersExport();
         $userExport->queue('users.xlsx');
 
         return $userExport->download('users.xlsx',
@@ -66,7 +66,7 @@ class ExcelController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function download(Request $request)
+    public function downloadWithMultipleSheets(Request $request)
     {
         return (new UsersExport())->download('users.xlsx');
     }

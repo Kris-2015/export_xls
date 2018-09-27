@@ -19,7 +19,7 @@
                 <div class="col-sm-6 button-pos-left">
                     <a
                         class="btn btn-primary"
-                        href="{{ route('export_file_queue') }}">
+                        href="{{ route('export_file_multiple_sheets') }}">
                         Download excel sheet
                     </a>
                 </div>
