@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Exports\UsersExport;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Jobs\NotifyUserOfCompletedExport;
 
+/**
+ * Class ExcelController
+ * @package App\Http\Controllers
+ * @purpose Class to export package of data into excel sheet
+ */
 class ExcelController extends Controller
 {
-    //
+    /**
+     * ExcelController constructor.
+     */
     public function __construct()
     {
         // Increase execution time so that document can be created
@@ -18,11 +24,21 @@ class ExcelController extends Controller
         ini_set('memory_limit', '-1');
     }
 
+    /**
+     * Function to return the view
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showPage ()
     {
-        return view ('excel');
+        $users = User::getSomeRec();
+        return view ('excel', compact('users'));
     }
 
+    /**
+     * Function to export data from db
+     * @param Request $request
+     * @return mixed
+     */
     public function export(Request $request)
     {
         //return Excel::download(new UsersExport, 'users.xlsx');
@@ -31,10 +47,17 @@ class ExcelController extends Controller
         return back()->withSuccess('Export started!');
     }
 
+    /**
+     * Function to export the db data into excel file using queue
+     * @param Request $request
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
     public function exportWithQueue (Request $request)
     {
-        return (new UsersExport)->queue('users.xlsx')->chain([
-            new NotifyUserOfCompletedExport(request()->user()),
-        ]);
+        $userExport = new UsersExport;
+        $userExport->queue('users.xlsx');
+
+        return $userExport->download('users.xlsx',
+            \Maatwebsite\Excel\Excel::XLSX);
     }
 }

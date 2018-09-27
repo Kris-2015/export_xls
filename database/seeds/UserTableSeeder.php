@@ -14,9 +14,12 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        // Insert one lakh dummy data in db
-        for ($i = 0; $i <= 500; $i++) {
+        // Perform insertion of dummy data of 100000 records
+        /*for ($i = 0; $i <= 500; $i++) {
+            // Insert the chunk of 200 records for 500 times
             factory(User::class, 200)->create();
-        }
+        }*/
+
+        factory(User::class, 200)->create();
     }
 }
