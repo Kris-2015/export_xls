@@ -15,13 +15,20 @@
 
     <div class="container">
         <div class="row button-pos">
-            <div class="col-sm-12">
-                <div class="col-sm-6 button-pos-left">
-                    <a
-                        class="btn btn-primary"
-                        href="{{ route('export_file_multiple_sheets') }}">
-                        Download excel sheet
-                    </a>
+            <div class="col-sm-4" style="margin-left: 15px">
+                <a
+                    class="btn btn-primary"
+                    href="{{ route('export_file_multiple_sheets') }}">
+                    Download excel sheet
+                </a>
+            </div>
+            <div class="col-sm-6" style="margin-left: -130px; margin-top: 8px">
+                <div class="progress">
+                    <div class="progress-bar bg-danger" role="progressbar"
+                         aria-valuenow="70" aria-valuemin="0"
+                         aria-valuemax="100" style="width:70%">
+                        70%
+                    </div>
                 </div>
             </div>
             <br><br>
