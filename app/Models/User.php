@@ -70,9 +70,9 @@ class User extends Authenticatable
     /**
      * Function to return the distinct list of country
      * @param void
-     * @return bool
+     * @return array | boolean
      */
-    public function getCountry()
+    public static function getCountry()
     {
         try {
             return User::select('country')->groupBy('country')->get();

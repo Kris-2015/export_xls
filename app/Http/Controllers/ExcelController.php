@@ -60,4 +60,14 @@ class ExcelController extends Controller
         return $userExport->download('users.xlsx',
             \Maatwebsite\Excel\Excel::XLSX);
     }
+
+    /**
+     * Function to download the excel file in multiple sheets
+     * @param Request $request
+     * @return \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+    public function download(Request $request)
+    {
+        return (new UsersExport())->download('users.xlsx');
+    }
 }
