@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
-use Complex\Exception;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Log;
+use Exception;
+use Log;
 
+/**
+ * Class User
+ * @package App\Models
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -59,6 +63,21 @@ class User extends Authenticatable
             Log::error('Error occured in fetching records in getSomeRec function:' .
                 $e->getMessage());
 
+            return false;
+        }
+    }
+
+    /**
+     * Function to return the distinct list of country
+     * @param void
+     * @return bool
+     */
+    public function getCountry()
+    {
+        try {
+            return User::select('country')->groupBy('country')->get();
+        } catch (Exception $e) {
+            Log::error('Error occured while getting the country' . $e);
             return false;
         }
     }
